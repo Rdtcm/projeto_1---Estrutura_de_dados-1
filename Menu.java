@@ -1,7 +1,12 @@
-
+// nome: Ryan Ledo RA: 10352727
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class Menu {
+
+    public static boolean flagEntradaExpressaoNumerica;
 
 
     private String expressaoNumerica;
@@ -30,13 +35,33 @@ public class Menu {
 
             System.out.println("Digite a opção desejada: ");
             op = scanner.nextInt();
-            scanner.nextLine();  // Limpeza do buffer
+
+            scanner.nextLine();
+    
 
             switch (op) {
                 case 1:
+                    //validando a entrada do usuario
+                    // para esta validacao utilizei o site https://www.devmedia.com.br/conceitos-basicos-sobre-expressoes-regulares-em-java/27539
+                    // como uma fonte de pesquisa, pesquisei por expressoes regulares em java
+                    String formatoPadraoParainput = "^[a-zA-Z()+\\-*/^]+$";
+
+                    // criando objeto pattern com o padrao estabelecido acima
+                    Pattern pattern = Pattern.compile(formatoPadraoParainput);
+
+                    //solicitando a entrada do usuario
                     System.out.println("Digite a expressão: ");
                     expressaoNumerica = scanner.nextLine();  // Recebe a expressão
                     System.out.println("Você digitou a expressão: " + expressaoNumerica);
+
+                    //criando um matcher para comparar a entrada do usuario com o padrao
+                    Matcher matcher = pattern.matcher(expressaoNumerica);
+
+                    if (matcher.matches()) 
+                        flagEntradaExpressaoNumerica = true;
+                    else
+                        flagEntradaExpressaoNumerica = false;
+                    
                     break;
 
                 case 2:
@@ -60,7 +85,7 @@ public class Menu {
                 default:
                     System.out.println("Opção inválida.");
             }
-        }
+        } 
     }
 
     // Getter para expressaoNumerica
