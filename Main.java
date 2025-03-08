@@ -5,12 +5,44 @@ public class Main {
         PilhaStr pilhaCaracter = new PilhaStr();
         String saida = "";
         String operadores = "+-*/^";
+        boolean flagAberturaParentesis;
+        PilhaStr pilhaParentesis = new PilhaStr();
 
-        //falta fazer a verificacao de abertura de parentesis para a expressaoNumerica
-        // exemplo (( a + b) - a * b nao deve ser aceito. Deve-se usar pilhas par resolver isso
+        // VERIFICACAO DE PARENTESIS DUPLICADOS
+        //empilhando os caracteres de abertura
+        for (int i=0; i < expressaoNumerica.length(); i++) {
+            if (expressaoNumerica.charAt(i) == '(')
+            {
+                pilhaParentesis.push(expressaoNumerica.charAt(i));
+            }
+        }
 
-        //validando a expressao numerica esta valida
-        if (Menu.flagEntradaExpressaoNumerica) {
+        //verificando se todas as aberturas sao fechadas, a flag deve ser true no final da execucao
+        for (int i=0; i < expressaoNumerica.length(); i++) {
+            if (expressaoNumerica.charAt(i) == ')')
+            {
+                //verificando se o topo da pilha corresponde ao simbolo de fechamento
+                // (((A+b)*d
+                if (!pilhaParentesis.isEmpty() && expressaoNumerica.charAt(i) == ')' && pilhaParentesis.topo() == '(')
+                {
+                    pilhaParentesis.pop(); // desempilha para verificar o proximo
+                }
+            }
+        }
+        // se a pilha nao estiver vazia quer dizer que nao foram fechados todos os parentesis
+        if (!pilhaParentesis.isEmpty())
+        {
+            flagAberturaParentesis = false;
+        }
+        else
+        {
+            flagAberturaParentesis = true;
+        }
+
+        System.out.println(flagAberturaParentesis);
+
+        //verificando se a expressao numerica e valida e se a flag de abertura de parentesis e verdadeira
+        if (Menu.flagEntradaExpressaoNumerica && flagAberturaParentesis == true) {
             // Transformando a expressão em maiúsculas
             String expressaoNumericaUpperCase = expressaoNumerica.toUpperCase();
 
@@ -52,6 +84,10 @@ public class Main {
             }
             
         } else {
+                if (flagAberturaParentesis == false)
+                {
+                    System.out.println("A expressao possui parentesis abertos que nao foram fechados");
+                }
                 System.out.println("A expressao numerica nao esta correta");
             }
         return saida;

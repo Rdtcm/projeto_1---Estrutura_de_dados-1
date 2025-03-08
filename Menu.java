@@ -22,6 +22,7 @@ public class Menu {
 
         // Exibe o menu
         while (true) {
+            //acrescentei codigos de escape ANSI apenas para deixar o print no terminal mais bonito e visivel
             System.out.println("\n");
             System.out.println("\033[1;34m*************************************\033[0m");
             System.out.println("\033[1;34m*               Menu                *\033[0m");
@@ -33,7 +34,7 @@ public class Menu {
             System.out.println("\033[1;32m5. Opção 5: Sair\033[0m");
             System.out.println("\033[1;34m*************************************\033[0m");
 
-            System.out.println("Digite a opção desejada: ");
+            System.out.println("\033[1;31mDigite a opção desejada: \033[0m");
             op = scanner.nextInt();
 
             scanner.nextLine();
