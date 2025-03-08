@@ -5,50 +5,45 @@ public class Main {
         PilhaStr pilhaCaracter = new PilhaStr();
         String saida = "";
         String operadores = "+-*/^";
-        // prioridade: ^, / ou *, + ou -
+        
+        // Transformando a expressão em maiúsculas
+        String expressaoNumericaUpperCase = expressaoNumerica.toUpperCase();
 
-        // percorrendo expressao numerica
-        for (int i=0; i < expressaoNumerica.length(); i++) {
-            // se for uma letra, coloco na saida
-            if (Character.isLetter(expressaoNumerica.charAt(i))) 
-            {
-                saida += expressaoNumerica.charAt(i);
+        // Percorrendo a expressão numérica
+        for (int i = 0; i < expressaoNumericaUpperCase.length(); i++) {
+            //usando ch para diminuir o tamanho das condicoes
+            char ch = expressaoNumericaUpperCase.charAt(i);
+
+            // Se for uma letra adiciona a saída
+            if (Character.isLetter(ch)) {
+                saida += ch;
+                System.out.println("saida: " + saida);
             }
-            // se for um caractere de operador
-            else if (operadores.indexOf(expressaoNumerica.charAt(i)) >= 0 ) 
-            {
-                //enquanto a pilha nao for vazia e a prioridade do topo for maior do que a do caracte na posicao i
-                while (! pilhaCaracter.isEmpty() && prioridade(pilhaCaracter.topo()) >= prioridade(expressaoNumerica.charAt(i))) {
+            // Se for um operador gerencia a pilha conforme a prioridade
+            else if (operadores.indexOf(ch) >= 0) {
+                // Desempilha enquanto a prioridade do topo da pilha for maior ou igual
+                while (!pilhaCaracter.isEmpty() && prioridade(pilhaCaracter.topo()) >= prioridade(ch)) {
                     saida += pilhaCaracter.pop();
                 }
-
-                pilhaCaracter.push(expressaoNumerica.charAt(i));
+                pilhaCaracter.push(ch);
             }
-
-            // se for um parentesis de abertura
-            else if (expressaoNumerica.charAt(i) == '(') 
-            {
-                pilhaCaracter.push(expressaoNumerica.charAt(i));
+            // Se for um parêntese de abertura, coloca na pilha
+            else if (ch == '(') {
+                pilhaCaracter.push(ch);
             }
-            // se for um parentesis de fechamento
-            else if (expressaoNumerica.charAt(i) == ')')
-            {
-                // desempilhando ate achar um parentesis de abertura
-                while (!pilhaCaracter.isEmpty() && pilhaCaracter.topo() != '(')
-                {
+            // Se for um parêntese de fechamento, desempilha até encontrar o parêntese de abertura
+            else if (ch == ')') {
+                while (!pilhaCaracter.isEmpty() && pilhaCaracter.topo() != '(') {
                     saida += pilhaCaracter.pop();
                 }
-                // desempilhando o parentesis de abertura
-                pilhaCaracter.pop();
+                pilhaCaracter.pop(); // tirando o parentese de abertura da pilha
             }
-            //esvziando a pilha e movendo para saida
-            while (! pilhaCaracter.isEmpty())
-            {
-                saida += pilhaCaracter.pop();
-            }
-            
         }
-        // System.out.println("Expressao na forma posfixa: " + saida);
+
+        // Esvaziando a pilha restante
+        while (!pilhaCaracter.isEmpty()) {
+            saida += pilhaCaracter.pop();
+        }
         return saida;
     }
     // metodo ou funcao para definir a prioridade
