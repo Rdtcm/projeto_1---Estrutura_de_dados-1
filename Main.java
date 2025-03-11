@@ -7,6 +7,17 @@ public class Main {
         String operadores = "+-*/^";
         boolean flagAberturaParentesis;
         PilhaStr pilhaParentesis = new PilhaStr();
+        boolean flagPeloMenosUmOperador = false;
+
+        //VERIFICANDO SE A EXPRESSAO DE ENTRADA POSSUI PELO MENOS UM OPERADOR
+        for (int i=0; i < expressaoNumerica.length(); i++) {
+            if (operadores.indexOf(expressaoNumerica.charAt(i)) >= 0) {
+                flagPeloMenosUmOperador = true;
+                System.out.println("flag pelo menos um operador: " + flagPeloMenosUmOperador);
+                break;
+            }
+        }
+
 
         // VERIFICACAO DE PARENTESIS DUPLICADOS
         //empilhando os caracteres de abertura
@@ -41,8 +52,8 @@ public class Main {
 
         System.out.println(flagAberturaParentesis);
 
-        //verificando se a expressao numerica e valida e se a flag de abertura de parentesis e verdadeira
-        if (Menu.flagEntradaExpressaoNumerica && flagAberturaParentesis == true) {
+        //Comecando a conversao se todas as flags forem validas
+        if (Menu.flagEntradaExpressaoNumerica && flagAberturaParentesis && flagPeloMenosUmOperador) {
             // Transformando a expressão em maiúsculas
             String expressaoNumericaUpperCase = expressaoNumerica.toUpperCase();
 
