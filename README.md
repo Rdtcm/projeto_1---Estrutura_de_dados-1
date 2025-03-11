@@ -1,3 +1,4 @@
+
 # PROJETO_1---Estrutura_de_Dados_1
 Repositório para implementar o projeto 1 da matéria Estrutura de Dados 1.
 GRUPO: ALEF,DERICK,RENAN,RYAN.
@@ -54,3 +55,6 @@ REFERÊNCIAS:
 
   - https://panda.ime.usp.br/algoritmos/static/eps/ep6/parted/parted-polonesa.html
   - https://pt.wikipedia.org/wiki/Jan_%C5%81ukasiewicz
+=======
+
+
