@@ -11,10 +11,23 @@ public class Menu {
 
     private String expressaoNumerica;
 
+    public String expressao_PosFixa;
+
     // Construtor da classe
     public Menu() {
         this.expressaoNumerica = "";
     }
+
+    // fazendo um getter da expressao numerica
+    public String getExpressaoNumerica() {
+        return this.expressaoNumerica;
+    }
+
+    // getter da expressao pos fixa
+    public String getExpressaoPosFixa() {
+        return this.expressao_PosFixa;
+    }
+    
 
     public void exibirMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -38,6 +51,8 @@ public class Menu {
             op = scanner.nextInt();
 
             scanner.nextLine();
+
+            // scanner.close();
     
 
             switch (op) {
@@ -66,15 +81,30 @@ public class Menu {
                     break;
 
                 case 2:
+                    System.out.println("Informe os numeros das variaveis: ");
+                    String input = scanner.nextLine();
+
+                    // dividindo a string em partes
+                    String[] partes = input.split(" ");
+
+                    // convertendo cada parte para inteiro e guardando em um array
+                    int[] entrada = new int[partes.length];
+                    for (int i = 0; i < partes.length; i++) {
+                        entrada[i] = Integer.parseInt(partes[i]);
+                    }
                     
-                    break;
+                    
 
                 case 3:
                     String expressaoPosFixa = Main.conversaoInfixaPosfixa(expressaoNumerica);
                     System.out.println("Expressao Posfixa: " + expressaoPosFixa);
+                    this.expressao_PosFixa = expressaoPosFixa;
                     break;
 
-                case 4:
+                case 4: // apresentar os resultados 
+
+                    // quando chamar o metodo preciso passar a expressao pos fixa
+                    Main.calcular(this.expressao_PosFixa);
                    
                     break;
 
@@ -89,13 +119,4 @@ public class Menu {
         } 
     }
 
-    // Getter para expressaoNumerica
-    public String getExpressaoNumerica() {
-        return expressaoNumerica;
-    }
-
-    // Setter para expressaoNumerica
-    public void setExpressaoNumerica(String expressaoNumerica) {
-        this.expressaoNumerica = expressaoNumerica;
-    }
 }
