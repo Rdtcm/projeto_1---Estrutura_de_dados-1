@@ -128,11 +128,10 @@ public class Main {
             }
     }
 
-    public static void calcular(String expressaoPosFixa) {
+    public static void calcular(String expressaoPosFixa,  char caracteres[], int valor[]) {
 
         Scanner scan = new Scanner(System.in );
-		char[] nome = new char[50];
-		int[] valor = {10, 10, 10};
+		
 		
 		Pilha pilha = new Pilha();
 
@@ -148,12 +147,12 @@ public class Main {
             char ch = expressaoPosFixa.charAt(i);
 
             // se for uma letra, guarda no array de letras
-            int posicaoVetor = 0;
+            /*int posicaoVetor = 0;
             if (Character.isLetter(ch)) {
-                nome[posicaoVetor] = ch;
+                //caracteres[posicaoVetor] = ch;
                 System.out.println(ch);
                 posicaoVetor++;
-            }
+            }*/
         }
 
      
@@ -162,45 +161,37 @@ public class Main {
 		// 	System.out.print(nome[i] +"=");
 		// 	  valor[i] = scan.nextInt();
 		// }
-		for(int i = 0 ; i < nome.length ; i++) {
-			System.out.println(nome[i] +"="+ valor[i]);
-			 
-		}	
-		char check = '0';
-		String expre = "AB^E^";
+		
+        char check = '0';
+		String expre = expressaoPosFixa;
 		
 		for(int i = 0; i < expre.length() ; i++) {
 			check = expre.charAt(i);
 			if ((check >= 65 && check <= 90) || (check >= 97 && check <= 122)) {
-			    for(int j=0; j< nome.length; j++) {
-			    	if(check == nome[j] || check - 32 == nome[j]|| check + 32 == nome[j]) {
+			    for(int j=0; j< caracteres.length; j++) {
+			    	if(check == caracteres[j] || check - 32 == caracteres[j]|| check + 32 == caracteres[j]) {
 			    		
 			    		pilha.push(valor[j]);
-			    		System.out.println(pilha);
 			    	}
 			    }
 			}if(check == '+') {
 				pihla2.soma();
-				System.out.println(pilha);
 			}
 			if(check == '-') {
 				pihla2.sub();
-				System.out.println(pilha);
 			}
 			if(check == '*') {
 				pihla2.multi();
-				System.out.println(pilha);
 			}
 			if(check == '/') {
 				pihla2.div();
-				System.out.println(pilha);
 			}
 			if(check == '^') {
 				pihla2.expo();
-				System.out.println(pilha);
 			}
-
+            
 		}
+        System.out.println("O resultado da expressão é :" + pilha.pop());
     }
 
     public static void main(String[] args) {
