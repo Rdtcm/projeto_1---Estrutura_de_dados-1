@@ -19,7 +19,7 @@ public class Main {
             for (int i=0; i < expressaoNumerica.length(); i++) {
                 if (operadores.indexOf(expressaoNumerica.charAt(i)) >= 0) {
                     flagPeloMenosUmOperador = true;
-                    System.out.println("flag pelo menos um operador: " + flagPeloMenosUmOperador);
+                    // System.out.println("flag pelo menos um operador: " + flagPeloMenosUmOperador);
                     break;
                 }
             }
@@ -56,8 +56,6 @@ public class Main {
                 flagAberturaParentesis = true;
             }
     
-            System.out.println(flagAberturaParentesis);
-    
             // ---------------------------------------------------------------------------------------------------------------------//
             //Comecando a conversao se todas as flags forem validas
             if (Menu.flagEntradaExpressaoNumerica && flagAberturaParentesis && flagPeloMenosUmOperador) {
@@ -73,7 +71,7 @@ public class Main {
                     // Se for uma letra adiciona a saída
                     if (Character.isLetter(ch)) {
                         saida += ch;
-                        System.out.println("saida: " + saida);
+                        // System.out.println("saida: " + saida);
                     }
                     // Se for um operador gerencia a pilha conforme a prioridade
                     else if (operadores.indexOf(ch) >= 0) {
@@ -147,21 +145,7 @@ public class Main {
             // simplicando as expressoes com  vriavel ch
             char ch = expressaoPosFixa.charAt(i);
 
-            // se for uma letra, guarda no array de letras
-            /*int posicaoVetor = 0;
-            if (Character.isLetter(ch)) {
-                //caracteres[posicaoVetor] = ch;
-                System.out.println(ch);
-                posicaoVetor++;
-            }*/
         }
-
-     
-		// System.out.println("Digite o valor dos numeros:");
-		// for(int i = 0 ; i < nome.length ; i++) {
-		// 	System.out.print(nome[i] +"=");
-		// 	  valor[i] = scan.nextInt();
-		// }
 		
         char check = '0';
 		String expre = expressaoPosFixa;

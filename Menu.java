@@ -75,7 +75,7 @@ public class Menu {
                     //solicitando a entrada do usuario
                     System.out.println("Digite a expressão: ");
                     expressaoNumerica = scanner.nextLine();  // Recebe a expressão
-                    System.out.println("Você digitou a expressão: " + expressaoNumerica);
+                    System.out.println("\nVocê digitou a expressão: " + expressaoNumerica);
 
                     //criando um matcher para comparar a entrada do usuario com o padrao
                     Matcher matcher = pattern.matcher(expressaoNumerica);
