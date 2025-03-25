@@ -13,6 +13,13 @@ public class Menu {
 
     public String expressao_PosFixa;
 
+    private String e;
+    private String armazem;
+    String veri;
+    private int count;
+    private int[] valor; 
+    private char[] carac;
+    private boolean permiti = false;
     // Construtor da classe
     public Menu() {
         this.expressaoNumerica = "";
@@ -73,25 +80,64 @@ public class Menu {
                     //criando um matcher para comparar a entrada do usuario com o padrao
                     Matcher matcher = pattern.matcher(expressaoNumerica);
 
-                    if (matcher.matches()) 
+                    if (matcher.matches()) {
                         flagEntradaExpressaoNumerica = true;
-                    else
+                        permiti = true;
+                    }
+                    else{
                         flagEntradaExpressaoNumerica = false;
-                    
+                    }
                     break;
 
                 case 2:
-                    System.out.println("Informe os numeros das variaveis: ");
-                    String input = scanner.nextLine();
-
-                    // dividindo a string em partes
-                    String[] partes = input.split(" ");
-
-                    // convertendo cada parte para inteiro e guardando em um array
-                    int[] entrada = new int[partes.length];
-                    for (int i = 0; i < partes.length; i++) {
-                        entrada[i] = Integer.parseInt(partes[i]);
-                    }
+                if(permiti) {
+                    count = 0;
+                    
+                   for (int i = 0; i < expressaoNumerica.length(); i++) {
+                       char c = expressaoNumerica.charAt(i);
+                       e += c;
+                       
+                       if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122)) {
+                           if(armazem== null) {
+                               count ++ ;
+                               armazem += c;
+                           }
+                           else if(!armazem.contains(e)) {
+                               count ++ ;
+                               armazem += c;
+                           }
+                           }
+                       e = "";
+                       }
+                   
+                   valor = new int[count];
+                   carac = new char[count];
+                   int numCaracter = 0;
+                   boolean test = true;
+                   for (int j = 0; j < expressaoNumerica.length(); j++) {
+                       char c = expressaoNumerica.charAt(j);
+                       test = true;
+                           if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122)) {
+                               for(int k = 0; k < count ; k++) {
+                                   if(carac[k] == c) {
+                                       test = false;
+                                   }
+                               }
+                               if(test) {
+                                       carac[numCaracter] = c;
+                                       System.out.println("Informe o valor de " + c + ":");
+                                       int input = scanner.nextInt();
+                                       valor[numCaracter] = input;
+                                       numCaracter++;
+                               }
+                               }
+                           }
+                   
+                }       
+                else{
+                   System.out.println("Informe a expressão primeiro");
+               }
+               break;
                     
                     
 
@@ -104,7 +150,7 @@ public class Menu {
                 case 4: // apresentar os resultados 
 
                     // quando chamar o metodo preciso passar a expressao pos fixa
-                    Main.calcular(this.expressao_PosFixa);
+                    Main.calcular(this.expressao_PosFixa,this.carac,this.valor);
                    
                     break;
 
