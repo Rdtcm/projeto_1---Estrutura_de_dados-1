@@ -138,7 +138,8 @@ public class Main {
 
 		OperaPilha pihla2 = new OperaPilha(pilha);
         
-      // --------------------------------------------------------------------------//
+      // --------------------------------------------------------------------------//1
+      
 
       // percorrendo a expressao pos fixa e colocando as letras em nome
         int tamanhoExpressao = expressaoPosFixa.length();
