@@ -1,33 +1,18 @@
-
+// nome: Renan Horochk de Andrade RA: 
 // nome: Ryan Ledo RA: 10352727
 
 import java.util.Scanner;
 
 public class Main {
-
     
-        public static String conversaoInfixaPosfixa(String expressaoNumerica) {
-            PilhaStr pilhaCaracter = new PilhaStr();
-            String saida = "";
-            String operadores = "+-*/^";
+        public static boolean validarAberturaParentesis(String expressaoNumerica) {
             boolean flagAberturaParentesis;
             PilhaStr pilhaParentesis = new PilhaStr();
-            boolean flagPeloMenosUmOperador = false;
-    
-    
-            //VERIFICANDO SE A EXPRESSAO DE ENTRADA POSSUI PELO MENOS UM OPERADOR
-            for (int i=0; i < expressaoNumerica.length(); i++) {
-                if (operadores.indexOf(expressaoNumerica.charAt(i)) >= 0) {
-                    flagPeloMenosUmOperador = true;
-                    // System.out.println("flag pelo menos um operador: " + flagPeloMenosUmOperador);
-                    break;
-                }
-            }
-    
-    
-            // VERIFICACAO DE PARENTESIS DUPLICADOS
+            int tamanhoExpressao = expressaoNumerica.length();
+            
+            // validacao parentesis nao fechados
             //empilhando os caracteres de abertura
-            for (int i=0; i < expressaoNumerica.length(); i++) {
+            for (int i=0; i < tamanhoExpressao; i++) {
                 if (expressaoNumerica.charAt(i) == '(')
                 {
                     pilhaParentesis.push(expressaoNumerica.charAt(i));
@@ -47,21 +32,48 @@ public class Main {
                 }
             }
             // se a pilha nao estiver vazia quer dizer que nao foram fechados todos os parentesis
-            if (!pilhaParentesis.isEmpty())
-            {
-                flagAberturaParentesis = false;
+            flagAberturaParentesis = pilhaParentesis.isEmpty();
+
+            if (flagAberturaParentesis == false) {
+                throw new IllegalArgumentException("Os parentesis nao foram fechados corretamente ");
             }
-            else
-            {
-                flagAberturaParentesis = true;
+            return flagAberturaParentesis;
+        }
+
+        public static boolean validarOperadores(String expressaoNumerica) {
+            boolean flagPeloMenosUmOperador = false;
+            String operadores = "+-*/^";
+            int tamanhoExpressao = expressaoNumerica.length();
+
+            //VERIFICANDO SE A EXPRESSAO DE ENTRADA POSSUI PELO MENOS UM OPERADOR
+            for (int i=0; i < tamanhoExpressao; i++) {
+                if (operadores.indexOf(expressaoNumerica.charAt(i)) >= 0) 
+                {
+                    flagPeloMenosUmOperador = true;
+                }
             }
+            if (flagPeloMenosUmOperador == false) {
+                throw new IllegalArgumentException("A expressao nao possui operadores! ");
+            }
+            return flagPeloMenosUmOperador;
+        }
     
+        public static String conversaoInfixaPosfixa(String expressaoNumerica) {
+            PilhaStr pilhaCaracter = new PilhaStr();
+            String saida = "";
+            String operadores = "+-*/^";
+            boolean flagAberturaParentesis;
+            boolean flagOperadores;
+
             // ---------------------------------------------------------------------------------------------------------------------//
-            //Comecando a conversao se todas as flags forem validas
-            if (Menu.flagEntradaExpressaoNumerica && flagAberturaParentesis && flagPeloMenosUmOperador) {
-                // Transformando a expressão em maiúsculas
-                String expressaoNumericaUpperCase = expressaoNumerica.toUpperCase();
-    
+            //Comecando a Conversao somente se a entrada for valida
+            flagAberturaParentesis = validarAberturaParentesis(expressaoNumerica);
+            flagOperadores = validarOperadores(expressaoNumerica);
+
+            try {
+
+                try {
+                    String expressaoNumericaUpperCase = expressaoNumerica.toUpperCase();
 
                 // Percorrendo a expressão numérica
                 for (int i = 0; i < expressaoNumericaUpperCase.length(); i++) {
@@ -71,7 +83,6 @@ public class Main {
                     // Se for uma letra adiciona a saída
                     if (Character.isLetter(ch)) {
                         saida += ch;
-                        // System.out.println("saida: " + saida);
                     }
                     // Se for um operador gerencia a pilha conforme a prioridade
                     else if (operadores.indexOf(ch) >= 0) {
@@ -99,14 +110,15 @@ public class Main {
                 {
                     saida += pilhaCaracter.pop();
                 }
-                
-                } else {
-                    if (flagAberturaParentesis == false)
-                    {
-                        System.out.println("A expressao possui parentesis abertos que nao foram fechados");
-                    }
-                    System.out.println("A expressao numerica nao esta correta");
+                    
+                } catch (Exception e) {
+                    System.out.println("A expressao no possui operadores! ");
                 }
+                
+            } catch (Exception e) {
+                System.out.println("Ha parentesis que nao foram fechados! ");
+            }
+                
         return saida;
     }
         // metodo ou funcao para definir a prioridade

@@ -5,14 +5,12 @@ import java.util.regex.Pattern;
 
 
 public class Menu {
-
+    // ATRIBUTOS    
     public static boolean flagEntradaExpressaoNumerica;
-
-
+    private boolean flagParentesis;
+    private boolean flagOperadores;
     private String expressaoNumerica;
-
     public String expressao_PosFixa;
-
     private String e;
     private String armazem;
     String veri;
@@ -61,21 +59,27 @@ public class Menu {
 
             // scanner.close();
     
-
             switch (op) {
                 case 1:
                     //validando a entrada do usuario
                     // para esta validacao utilizei o site https://www.devmedia.com.br/conceitos-basicos-sobre-expressoes-regulares-em-java/27539
                     // como uma fonte de pesquisa, pesquisei por expressoes regulares em java
                     String formatoPadraoParainput = "^[a-zA-Z()+\\-*/^]+$";
+                    boolean flagP;
+                    boolean flagOp;
 
                     // criando objeto pattern com o padrao estabelecido acima
                     Pattern pattern = Pattern.compile(formatoPadraoParainput);
 
                     //solicitando a entrada do usuario
-                    System.out.println("Digite a expressão: ");
-                    expressaoNumerica = scanner.nextLine();  // Recebe a expressão
-                    System.out.println("\nVocê digitou a expressão: " + expressaoNumerica);
+                    try {
+                        System.out.println("Digite a expressão: ");
+                        expressaoNumerica = scanner.nextLine();  // Recebe a expressão
+                        System.out.println("\nVocê digitou a expressão: " + expressaoNumerica);
+                    } catch (Exception e) {
+                        System.out.println("Erro ao obter a entrada: " + e);
+                    }
+                    
 
                     //criando um matcher para comparar a entrada do usuario com o padrao
                     Matcher matcher = pattern.matcher(expressaoNumerica);
@@ -86,6 +90,22 @@ public class Menu {
                     }
                     else{
                         flagEntradaExpressaoNumerica = false;
+                    }
+
+                    // verificando se todos os parentesis foram fechdos
+                    try {
+                        flagP = Main.validarAberturaParentesis(this.expressaoNumerica);
+                        this.flagParentesis = flagP;
+                    } catch (Exception e) {
+                        System.out.println("Ha parentesis que nao foram fechados na entrada! ");
+                    }
+
+                    // verificando se ha pelo menos um operador
+                    try {
+                        flagOp = Main.validarOperadores(this.expressaoNumerica);
+                        this.flagOperadores = flagOp;
+                    } catch (Exception e) {
+                        System.out.println("A expressao nao possui nenhum operador! ");
                     }
                     break;
 
@@ -137,10 +157,10 @@ public class Menu {
                 else{
                    System.out.println("Informe a expressão primeiro");
                }
+
                break;
                     
                     
-
                 case 3:
                     String expressaoPosFixa = Main.conversaoInfixaPosfixa(expressaoNumerica);
                     System.out.println("Expressao Posfixa: " + expressaoPosFixa);
