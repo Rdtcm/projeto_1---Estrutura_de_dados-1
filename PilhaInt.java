@@ -1,4 +1,16 @@
-// nome: Ryan Ledo RA: 10352727
+/*
+Nome:Alef de souza Iima
+RA:10431891
+-------------------------------
+Nome:Derick Sant’Ana Nascimento
+RA:10443727
+-------------------------------
+Nome:Renan Horochk de Andrade
+RA:10438120
+-------------------------------
+Nome:Ryan Vinicius Ledo
+RA:10352727
+ */
 public class PilhaInt {
     private static final int TAM_DEFAULT = 100; 
     private int topoPilha; 
