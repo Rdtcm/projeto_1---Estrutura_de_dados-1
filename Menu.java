@@ -156,11 +156,20 @@ public class Menu {
                                    }
                                }
                                if(test) {
+                             boolean verfi = false;
+                             do{
+                                try{
                                        carac[numCaracter] = c;
                                        System.out.println("Informe o valor de " + c + ":");
                                        int input = scanner.nextInt();
                                        valor[numCaracter] = input;
                                        numCaracter++;
+                                       verfi = true;
+                                }catch(Exception e){
+                                    System.out.println("Dígito errado! Insira um número válido.");
+                                    scanner.nextLine();//limpa o scanner
+                                }
+                             }while(verfi == false);
                                }
                                }
                            }
