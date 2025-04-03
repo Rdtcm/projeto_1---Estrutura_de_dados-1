@@ -30,6 +30,8 @@ public class Menu {
     private int[] valor; 
     private char[] carac;
     private boolean permiti = false;
+    private boolean permiti2 = false;
+    private boolean permiti3 = false;
     // Construtor da classe
     public Menu() {
         this.expressaoNumerica = "";
@@ -173,7 +175,7 @@ public class Menu {
                                }
                                }
                            }
-                   
+                           permiti2 = true;
                 }       
                 else{
                    System.out.println("Informe a expressão primeiro");
@@ -183,18 +185,33 @@ public class Menu {
                     
                     
                 case 3:
+                if(permiti) {
                     String expressaoPosFixa = Main.conversaoInfixaPosfixa(expressaoNumerica);
                     System.out.println("Expressao Posfixa: " + expressaoPosFixa);
                     this.expressao_PosFixa = expressaoPosFixa;
-                    break;
-
+                    permiti3 = true;
+                    
+                }else{
+                        System.out.println("Informe a expressão primeiro");
+                }
+                break;
                 case 4: // apresentar os resultados 
-
+                if(permiti) {
+                    if(permiti2){
+                        if(permiti3){
                     // quando chamar o metodo preciso passar a expressao pos fixa
                     Main.calcular(this.expressao_PosFixa,this.carac,this.valor);
                    
-                    break;
-
+                    }else{
+                        System.out.println("Informe a expressão pos fixa");
+                    }
+                    }else{
+                        System.out.println("Informe os valores primeiro");
+                    }
+                }else{
+                        System.out.println("Informe a expressão primeiro");
+                }
+                break;
                 case 5:
                     System.out.println("Programa encerrado");
                     scanner.close();
