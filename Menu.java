@@ -178,7 +178,7 @@ public class Menu {
                            permiti2 = true;
                 }       
                 else{
-                   System.out.println("Informe a expressão primeiro");
+                   System.out.println("Informe a expressão primeiro!");
                }
 
                break;
@@ -192,7 +192,7 @@ public class Menu {
                     permiti3 = true;
                     
                 }else{
-                        System.out.println("Informe a expressão primeiro");
+                        System.out.println("Informe a expressão primeiro!");
                 }
                 break;
                 case 4: // apresentar os resultados 
@@ -203,13 +203,13 @@ public class Menu {
                     Main.calcular(this.expressao_PosFixa,this.carac,this.valor);
                    
                     }else{
-                        System.out.println("Informe a expressão pos fixa");
+                        System.out.println("Informe a expressão pos fixa primeiro!");
                     }
                     }else{
-                        System.out.println("Informe os valores primeiro");
+                        System.out.println("Informe os valores primeiro!");
                     }
                 }else{
-                        System.out.println("Informe a expressão primeiro");
+                        System.out.println("Informe a expressão primeiro!");
                 }
                 break;
                 case 5:
